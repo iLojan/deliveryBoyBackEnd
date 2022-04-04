@@ -4,6 +4,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.security.spec.InvalidKeySpecException;
 
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +29,7 @@ import com.bo.responses.UserInfo;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1")
+@Slf4j
 public class AuthenticationController {
 
 	@Autowired
@@ -40,7 +43,7 @@ public class AuthenticationController {
 
 	@PostMapping("/auth/login")
 	public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws InvalidKeySpecException, NoSuchAlgorithmException {
-
+log.debug("test");
 		final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
 				authenticationRequest.getUserName(), authenticationRequest.getPassword()));
 		
@@ -68,7 +71,11 @@ public class AuthenticationController {
 		
 		return ResponseEntity.ok(userInfo);
 		
-		
-		
+
+	}
+	@GetMapping("/home")
+	public  String GetHome(){
+		log.info("return home ===============+++++++++++++++++++");
+		return "test";
 	}
 }
