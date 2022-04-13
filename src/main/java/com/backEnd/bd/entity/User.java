@@ -21,6 +21,9 @@ public class User {
     private String email;
     private String password;
 
+    @OneToOne(mappedBy = "user123")
+    private UserDetails userDetails;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

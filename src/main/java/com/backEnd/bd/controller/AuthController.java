@@ -1,12 +1,15 @@
 package com.backEnd.bd.controller;
 
 
+import com.backEnd.bd.entity.Product;
 import com.backEnd.bd.entity.Role;
 import com.backEnd.bd.entity.User;
+import com.backEnd.bd.payload.DriverSignUpDto;
 import com.backEnd.bd.payload.LoginDto;
 import com.backEnd.bd.payload.SignUpDto;
 import com.backEnd.bd.repository.RoleRepository;
 import com.backEnd.bd.repository.UserRepository;
+import com.backEnd.bd.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -28,6 +32,9 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
@@ -51,29 +58,26 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
 
-        // add check for username exists in a DB
-        if(userRepository.existsByUsername(signUpDto.getUsername())){
-            return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
-        }
-
-        // add check for email exists in DB
-        if(userRepository.existsByEmail(signUpDto.getEmail())){
-            return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
-        }
-
-        // create user object
-        User user = new User();
-        user.setName(signUpDto.getName());
-        user.setUsername(signUpDto.getUsername());
-        user.setEmail(signUpDto.getEmail());
-        user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
-//        ROLE_ADMIN
-        Role roles = roleRepository.findByName(signUpDto.getRole()).get();
-        user.setRoles(Collections.singleton(roles));
-
-        userRepository.save(user);
-
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+       return userService.riderSignUp(signUpDto);
 
     }
+
+    @PostMapping("/driverSignup")
+    public ResponseEntity<?> registerDriver(@RequestBody DriverSignUpDto driverSignUpDto){
+
+        return userService.driverSignUp(driverSignUpDto);
+
+    }
+
+    @GetMapping("/getAllUser")
+    public List<User> getAllUserDetails(){
+        log.info("findAllUser home +++++++++++++++++++");
+        return userService.getAllUser();
+    }
+    @GetMapping("/getUser/{email}")
+    public User findProductByName(@PathVariable String email) {
+        log.info("return home +++++++++++++++++++",email);
+        return userService.getUserByMail(email);
+    }
+
 }
