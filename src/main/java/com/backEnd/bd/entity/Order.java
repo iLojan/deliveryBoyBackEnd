@@ -13,8 +13,13 @@ public class Order {
     private long id;
     private String material;
     private String weight;
+    private double distance  ;
+    private double price;
+    private String duration;
     private String information;
     private String status;
+    private String fromLocation;
+    private String toLocation;
 
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -30,6 +30,6 @@ public class UserDetails {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user123;
+    private User user;
 
 }

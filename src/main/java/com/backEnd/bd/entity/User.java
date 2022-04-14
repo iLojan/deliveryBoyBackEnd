@@ -21,8 +21,8 @@ public class User {
     private String email;
     private String password;
 
-    @OneToOne(mappedBy = "user123")
-    private UserDetails userDetails;
+//    @OneToOne(mappedBy = "user")
+//    private UserDetails userDetails;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
