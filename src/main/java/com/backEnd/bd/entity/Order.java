@@ -20,6 +20,9 @@ public class Order {
     private String status;
     private String fromLocation;
     private String toLocation;
+    private String receiverName;
+    private String receiverEmail;
+    private String receiverPhoneNumber;
 
 
     @OneToOne(cascade = CascadeType.ALL)

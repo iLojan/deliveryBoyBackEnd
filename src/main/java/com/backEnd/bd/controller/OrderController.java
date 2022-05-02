@@ -24,4 +24,9 @@ public class OrderController {
     public List<Order> findAllOrder() {
         return orderService.getOrder();
     }
+
+    @GetMapping("/orderById/{id}")
+    public Order findOrderById(@PathVariable int id) {
+        return orderService.getOrderById(id);
+    }
 }
