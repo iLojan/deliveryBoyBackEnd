@@ -1,5 +1,6 @@
 package com.backEnd.bd.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,6 +24,10 @@ public class User {
 
 //    @OneToOne(mappedBy = "user")
 //    private UserDetails userDetails;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
+    private Order order;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",

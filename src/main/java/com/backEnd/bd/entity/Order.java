@@ -1,5 +1,7 @@
 package com.backEnd.bd.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,13 +27,20 @@ public class Order {
     private String receiverPhoneNumber;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private UserDetails sendUser;
+
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "driver_id", referencedColumnName = "id")
-    private UserDetails userDetails;
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private User user;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_id", referencedColumnName = "id")
+//    private UserDetails sendUser;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "driver_id", referencedColumnName = "id")
+//    private UserDetails userDetails;
 
 
 

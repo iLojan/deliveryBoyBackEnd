@@ -18,12 +18,11 @@ public class UserDetails {
     private String email;
     private String address;
 
-    @OneToOne(mappedBy = "sendUser")
-    private Order orderUser;
-
-    @OneToOne(mappedBy = "userDetails")
-    private Order order;
-
+//    @OneToOne(mappedBy = "sendUser")
+//    private Order orderUser;
+//
+//    @OneToOne(mappedBy = "userDetails")
+//    private Order order;
 
 
 
