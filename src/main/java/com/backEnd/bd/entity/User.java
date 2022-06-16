@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -25,13 +26,17 @@ public class User {
 //    @OneToOne(mappedBy = "user")
 //    private UserDetails userDetails;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonManagedReference
-    private Order order;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    @JsonManagedReference
+//    private List<Order> order;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
+
+//    @OneToMany(targetEntity = Product.class,cascade = CascadeType.ALL)
+//    @JoinColumn(name ="cp_fk",referencedColumnName = "id")
+//    private List<Order> o;
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,14 +26,19 @@ public class Order {
     private String receiverName;
     private String receiverEmail;
     private String receiverPhoneNumber;
+    private String userId;
+    private  long driverId;
 
 
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private User user;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JsonManagedReference
+//    private User user;
+
+//    @OneToMany(targetEntity = Product.class,cascade = CascadeType.ALL)
+//    @JoinColumn(name ="cp_fk",referencedColumnName = "id")
+//    private List<User> user;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "user_id", referencedColumnName = "id")
