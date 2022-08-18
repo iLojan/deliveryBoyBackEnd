@@ -4,9 +4,12 @@ package com.backEnd.bd.controller;
 import com.backEnd.bd.entity.Product;
 import com.backEnd.bd.entity.Role;
 import com.backEnd.bd.entity.User;
+import com.backEnd.bd.entity.UserDetails;
+import com.backEnd.bd.exception.ResourceNotFoundException;
 import com.backEnd.bd.payload.DriverSignUpDto;
 import com.backEnd.bd.payload.LoginDto;
 import com.backEnd.bd.payload.SignUpDto;
+import com.backEnd.bd.payload.UserRequest;
 import com.backEnd.bd.repository.RoleRepository;
 import com.backEnd.bd.repository.UserRepository;
 import com.backEnd.bd.service.UserService;
@@ -21,6 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 
@@ -57,16 +61,23 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
-
        return userService.riderSignUp(signUpDto);
-
     }
 
-    @PostMapping("/driverSignup")
-    public ResponseEntity<?> registerDriver(@RequestBody DriverSignUpDto driverSignUpDto){
+    @PostMapping("/putUser")
+    public ResponseEntity<User> updateUser(
+            @Valid @RequestBody UserRequest userDetails) throws ResourceNotFoundException {
 
-        return userService.driverSignUp(driverSignUpDto);
-
+        User user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(()-> new ResourceNotFoundException("User not found on :: "+ userDetails.getUser().getId()));
+        user.setUsername(userDetails.getUser().getUsername());
+        user.setName(userDetails.getUser().getName());
+        user.setAddress(userDetails.getUser().getAddress());
+        user.setFistName(userDetails.getUser().getFistName());
+        user.setLastName(userDetails.getUser().getLastName());
+        user.setPhoneNumber(userDetails.getUser().getPhoneNumber());
+        user.setDriverPrices(userDetails.getUser().getDriverPrices());
+        final User updatedUser = userRepository.save(user);
+        return ResponseEntity.ok(updatedUser);
     }
 
     @GetMapping("/getAllUser")
@@ -76,7 +87,7 @@ public class AuthController {
     }
     @GetMapping("/getUser/{email}")
     public User findProductByName(@PathVariable String email) {
-        log.info("return home +++++++++++++++++++",email);
+        log.info("return home 12 +++++++++++++++++++",email);
         return userService.getUserByMail(email);
     }
 
