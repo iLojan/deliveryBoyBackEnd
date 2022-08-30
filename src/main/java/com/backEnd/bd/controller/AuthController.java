@@ -66,9 +66,11 @@ public class AuthController {
 
     @PostMapping("/putUser")
     public ResponseEntity<User> updateUser(
-            @Valid @RequestBody UserRequest userDetails) throws ResourceNotFoundException {
 
+            @Valid @RequestBody UserRequest userDetails) throws ResourceNotFoundException {
+        log.info("putUser home +++++++++++++++++++");
         User user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(()-> new ResourceNotFoundException("User not found on :: "+ userDetails.getUser().getId()));
+
         user.setUsername(userDetails.getUser().getUsername());
         user.setName(userDetails.getUser().getName());
         user.setAddress(userDetails.getUser().getAddress());

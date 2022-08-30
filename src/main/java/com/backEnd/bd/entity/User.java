@@ -30,8 +30,8 @@ public class User {
     private String roles;
 
 
-    @OneToMany(targetEntity = DriverPrices.class,cascade = CascadeType.ALL)
+    @OneToOne(targetEntity = DriverPrices.class,cascade = CascadeType.ALL)
     @JoinColumn(name ="cp_fk",referencedColumnName = "id")
-    private List<DriverPrices> driverPrices ;
+    private DriverPrices driverPrices ;
 
 }

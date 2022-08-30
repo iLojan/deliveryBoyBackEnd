@@ -3,8 +3,12 @@ package com.backEnd.bd.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -16,8 +20,10 @@ public class Order {
     private long id;
     private String material;
     private String weight;
-    private double distance  ;
-    private double price;
+    private double distance;
+    private double total;
+    private double standardPrice;
+    private double driverExtraPrice;
     private String duration;
     private String information;
     private String status;
@@ -28,8 +34,8 @@ public class Order {
     private String receiverPhoneNumber;
     private String userId;
     private  long driverId;
-
-
+    private String createdAt;
+    private String updatedAt;
 
 
 //    @ManyToOne(cascade = CascadeType.ALL)

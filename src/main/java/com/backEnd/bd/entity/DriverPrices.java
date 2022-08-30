@@ -17,7 +17,7 @@ public class DriverPrices {
     private long id;
 
     private double price;
-    private String distance;
+    private long OrderId;
     private  String hour;
 
 
