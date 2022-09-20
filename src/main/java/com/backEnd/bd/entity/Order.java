@@ -22,6 +22,7 @@ public class Order {
     private String weight;
     private double distance;
     private double total;
+    private double price;
     private double standardPrice;
     private double driverExtraPrice;
     private String duration;
