@@ -28,10 +28,14 @@ public class User {
     private String phoneNumber;
     private String address;
     private String roles;
-
+    private String test;
 
     @OneToOne(targetEntity = DriverPrices.class,cascade = CascadeType.ALL)
     @JoinColumn(name ="cp_fk",referencedColumnName = "id")
     private DriverPrices driverPrices ;
+
+    @OneToMany(targetEntity = DriverRating.class,cascade = CascadeType.ALL)
+    @JoinColumn(name ="rating_fk",referencedColumnName = "id")
+    private List<DriverRating> driverRatings;
 
 }

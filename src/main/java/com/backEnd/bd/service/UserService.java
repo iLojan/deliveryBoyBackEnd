@@ -1,12 +1,10 @@
 package com.backEnd.bd.service;
 
-import com.backEnd.bd.entity.Driver;
-import com.backEnd.bd.entity.Product;
-import com.backEnd.bd.entity.Role;
-import com.backEnd.bd.entity.User;
+import com.backEnd.bd.entity.*;
 import com.backEnd.bd.payload.DriverSignUpDto;
 import com.backEnd.bd.payload.SignUpDto;
 import com.backEnd.bd.payload.UserRequest;
+import com.backEnd.bd.repository.DriverRatingRepository;
 import com.backEnd.bd.repository.DriverRepository;
 import com.backEnd.bd.repository.RoleRepository;
 import com.backEnd.bd.repository.UserRepository;
@@ -36,6 +34,8 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private DriverRatingRepository driverRatingRepository;
 
     public  ResponseEntity<?> putUserDetails(UserRequest userRequest){
         log.info("return home +++++++++++++++++++ userRequest",userRequest.getUser());
@@ -92,10 +92,25 @@ public class UserService {
         return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
     }
 
+    public DriverRating saveRating(DriverRating driverRating) {
+        return driverRatingRepository.save(driverRating);
+    }
 
+    public List<DriverRating> getRatingByUserId(long id){
+        return driverRatingRepository.findByUserId(id);
+    }
     public User getUserByMail(String email) {
         log.info("return home ===============+++++++++++++++++++",email);
         return userRepository.findByEmail(email);
+    }
+    public List<User> getUserByRole(String role) {
+        log.info("return home ===============+++++++++++++++++++",role);
+        return userRepository.findByRoles(role);
+    }
+
+    public User getUserById(long id) {
+        log.info("return home ===============+++++++++++++++++++",id);
+        return userRepository.findById(id).orElse(null);
     }
     public List<User>getAllUser(){
         log.info("getAllUser home ===============+++++++++++++++++++");

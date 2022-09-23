@@ -1,10 +1,7 @@
 package com.backEnd.bd.controller;
 
 
-import com.backEnd.bd.entity.Product;
-import com.backEnd.bd.entity.Role;
-import com.backEnd.bd.entity.User;
-import com.backEnd.bd.entity.UserDetails;
+import com.backEnd.bd.entity.*;
 import com.backEnd.bd.exception.ResourceNotFoundException;
 import com.backEnd.bd.payload.DriverSignUpDto;
 import com.backEnd.bd.payload.LoginDto;
@@ -78,6 +75,7 @@ public class AuthController {
         user.setLastName(userDetails.getUser().getLastName());
         user.setPhoneNumber(userDetails.getUser().getPhoneNumber());
         user.setDriverPrices(userDetails.getUser().getDriverPrices());
+        user.setDriverRatings(userDetails.getUser().getDriverRatings());
         final User updatedUser = userRepository.save(user);
         return ResponseEntity.ok(updatedUser);
     }
@@ -92,5 +90,22 @@ public class AuthController {
         log.info("return home 12 +++++++++++++++++++",email);
         return userService.getUserByMail(email);
     }
-
+    @GetMapping("/getUserById/{id}")
+    public User findProductById(@PathVariable long id) {
+        log.info("return home 12 +++++++++++++++++++",id);
+        return userService.getUserById(id);
+    }
+    @GetMapping("/getUserByRole/{role}")
+    public List<User> findUserByRole(@PathVariable String role) {
+        log.info("return home 12 +++++++++++++++++++",role);
+        return userService.getUserByRole(role);
+    }
+    @PostMapping("/addRating")
+    public DriverRating addRating(@RequestBody DriverRating rating) {
+        return userService.saveRating(rating);
+    }
+    @GetMapping("/getRating/{id}")
+    public List<DriverRating> findRatingByUserEmail(@PathVariable long id) {
+        return userService.getRatingByUserId(id);
+    }
 }
