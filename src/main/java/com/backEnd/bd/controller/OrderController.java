@@ -5,6 +5,7 @@ import com.backEnd.bd.entity.Order;
 import com.backEnd.bd.entity.Product;
 import com.backEnd.bd.entity.User;
 import com.backEnd.bd.exception.ResourceNotFoundException;
+import com.backEnd.bd.payload.OrderRequest;
 import com.backEnd.bd.payload.UserRequest;
 import com.backEnd.bd.repository.DriverRepository;
 import com.backEnd.bd.repository.OrderRepository;
@@ -98,6 +99,22 @@ public class OrderController {
     @GetMapping("/orderByEmail/{email}")
     public List<Order> findOrderByUserEmail(@PathVariable String email) {
         return orderService.getOrderByUserMail(email);
+    }
+    @GetMapping("/orderDriverId/{id}")
+    public List<Order> findOrderByDriverId(@PathVariable long id) {
+        return orderService.getOrderByDriverId(id);
+    }
+    @PostMapping("/updateStatus")
+    public ResponseEntity<Order> updateUser(
+
+            @Valid @RequestBody OrderRequest orderRequest) throws ResourceNotFoundException {
+        log.info("putUser home +++++++++++++++++++");
+        Order order = orderRepository.findById(orderRequest.getId()).orElseThrow(()-> new ResourceNotFoundException("order not found on :: "+ orderRequest.getId()));
+
+        order.setStatus(orderRequest.getStatus());
+
+        final Order updatedOrder = orderRepository.save(order);
+        return ResponseEntity.ok(updatedOrder);
     }
 
 
