@@ -37,7 +37,7 @@ public class Order {
     private  long driverId;
     private String createdAt;
     private String updatedAt;
-
+    private double driverAdditionalCharge;
 
 //    @ManyToOne(cascade = CascadeType.ALL)
 //    @JsonManagedReference

@@ -2,20 +2,14 @@ package com.backEnd.bd.controller;
 
 import com.backEnd.bd.entity.DriverPrices;
 import com.backEnd.bd.entity.Order;
-import com.backEnd.bd.entity.Product;
-import com.backEnd.bd.entity.User;
 import com.backEnd.bd.exception.ResourceNotFoundException;
 import com.backEnd.bd.payload.OrderRequest;
-import com.backEnd.bd.payload.UserRequest;
 import com.backEnd.bd.repository.DriverRepository;
 import com.backEnd.bd.repository.OrderRepository;
 import com.backEnd.bd.repository.UserRepository;
 import com.backEnd.bd.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

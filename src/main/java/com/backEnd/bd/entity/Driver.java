@@ -9,8 +9,6 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Data
-@Entity
-@Table(name="driver")
 public class Driver {
 
 
