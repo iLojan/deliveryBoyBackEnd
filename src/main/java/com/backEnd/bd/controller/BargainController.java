@@ -2,9 +2,8 @@ package com.backEnd.bd.controller;
 
 
 import com.backEnd.bd.entity.Bargain;
-import com.backEnd.bd.entity.Order;
 import com.backEnd.bd.exception.ResourceNotFoundException;
-import com.backEnd.bd.repository.BargainRepository;
+import com.backEnd.bd.entity.repository.BargainRepository;
 import com.backEnd.bd.service.BargainService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

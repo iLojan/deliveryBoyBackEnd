@@ -2,8 +2,8 @@ package com.backEnd.bd.service;
 
 import com.backEnd.bd.entity.DriverPrices;
 import com.backEnd.bd.entity.Order;
-import com.backEnd.bd.repository.DriverRepository;
-import com.backEnd.bd.repository.OrderRepository;
+import com.backEnd.bd.entity.repository.DriverRepository;
+import com.backEnd.bd.entity.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

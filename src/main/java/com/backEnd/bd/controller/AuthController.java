@@ -3,12 +3,11 @@ package com.backEnd.bd.controller;
 
 import com.backEnd.bd.entity.*;
 import com.backEnd.bd.exception.ResourceNotFoundException;
-import com.backEnd.bd.payload.DriverSignUpDto;
 import com.backEnd.bd.payload.LoginDto;
 import com.backEnd.bd.payload.SignUpDto;
 import com.backEnd.bd.payload.UserRequest;
-import com.backEnd.bd.repository.RoleRepository;
-import com.backEnd.bd.repository.UserRepository;
+import com.backEnd.bd.entity.repository.RoleRepository;
+import com.backEnd.bd.entity.repository.UserRepository;
 import com.backEnd.bd.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 
 @RestController

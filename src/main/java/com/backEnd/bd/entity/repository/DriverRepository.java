@@ -1,4 +1,4 @@
-package com.backEnd.bd.repository;
+package com.backEnd.bd.entity.repository;
 
 import com.backEnd.bd.entity.Driver;
 import com.backEnd.bd.entity.DriverPrices;
