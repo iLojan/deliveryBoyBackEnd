@@ -17,6 +17,7 @@ public class Bargain {
     private double price;
     private String hour;
     private String status;
+    private String type;
 
 
 }
